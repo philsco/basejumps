@@ -54,8 +54,15 @@ app.get('/timestamp/*', function (req, res) {
 app.get('/header', function (req, res) {
     var ua = parser(req.headers['user-agent']);
     var payload = {};
+    var ipAddr = req.headers["x-forwarded-for"];
+      if (ipAddr){
+        var list = ipAddr.split(",");
+            payload.ipaddress = list[list.length-1];
+        } else {
+            payload.ipaddress = req.connection.remoteAddress;
+     }
      payload.software = ua.os.name + " " + ua.os.version;
-     payload.ipaddress = req.ip;
+//     payload.ipaddress = req.ip;  // Doesn't work on Heroku
      payload.language = req.headers["accept-language"].split(',')[0];
      res.send('<pre>' + JSON.stringify(payload) + '</pre>');
 });
