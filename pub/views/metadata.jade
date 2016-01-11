@@ -1,0 +1,22 @@
+html(lang="en")
+  head
+    title API Basejump: File Metadata microservice
+    meta( charset='utf-8' )
+    meta( http-equiv='X-UA-Compatible', content='IE=edge' )
+    meta( name='viewport', content='width=device-width, initial-scale=1.0' )
+    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet")
+ 
+body
+  .container
+    h3(style="padding-top:20px; padding-bottom:20px;") FCC Basejump: File Metadata microservice
+    blockquote User Stories:
+      ol
+       li(style="padding-top: 10px;") User can submit a FormData object that includes a file upload.
+       li(style="padding-top: 10px;") Once the upload is completed, user receives the file size in bytes within the JSON response.
+  
+    h3(style="apdding-bottom: 10px;") File upload
+    form(name="upload", action="/upload", enctype="multipart/form-data", method="post")
+      label(type="text", class="control-label", name="Select File")
+      input(type="file", class="file btn btn-default", id="select" name="fileup")
+      input(type="submit" class="btn btn-primary" value="Upload" style="margin-top: 25px")
+      

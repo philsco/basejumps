@@ -1,15 +1,16 @@
 
 var express = require('express');
 var url = require('url');
+var fs = require('fs')
+var path = require('path')
+var multer  = require('multer')
 var parser = require('ua-parser-js');
+
+var upload = multer({ dest: 'pub/uploads/' });
 
 var app = express();
 app.set('view engine', 'jade');
 app.set('views', './pub/views');
-
-/*
-app.use('/static', express.static(__dirname + '/pub'));
-*/
 
 var months = {
     "Jan": "January", 
@@ -25,7 +26,6 @@ var months = {
     "Nov": "November", 
     "Dec": "December"
 }
-
 
 app.get('/timestamp', function (req, res) {
    res.render('times') 
@@ -67,6 +67,23 @@ app.get('/header', function (req, res) {
      res.send('<pre>' + JSON.stringify(payload) + '</pre>');
 });
 
+app.post('/upload', upload.single('fileup'), function (req, res, next) {
+        res.render("confirm", {filesize: "File size: "+req.file.size+" bytes"});
+        next();
+    }, function (req, res) {
+        fs.unlink(path.resolve(req.file.path), function (err) {
+            if (err){
+                console.log('Error encountered while removing the file');
+            } else {
+                console.log('file deleted');
+            }
+        })
+    }
+);
+
+app.get('/metadata', function (req, res) {
+  res.render('metadata');
+})
 
 app.all('/*', function (req, res) {
   res.render('index');
