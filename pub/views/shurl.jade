@@ -1,0 +1,31 @@
+doctype
+html(lang="en")
+  head
+    title FCC : URL Shortener Microservice
+    meta( charset='utf-8' )
+    meta( http-equiv='X-UA-Compatible', content='IE=edge' )
+    meta( name='viewport', content='width=device-width, initial-scale=1.0' )
+    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet")
+ 
+body
+  .container
+    h3(style="padding-top:20px; padding-bottom:20px;") FCC Basejump: File Metadata microservice
+    blockquote User Stories:
+      ol
+       li(style="padding-top: 10px;") I can pass a URL as a parameter and I will receive a shortened URL in the JSON response.
+       li(style="padding-top: 10px;") When I visit that shortened URL, it will redirect me to my original link.
+    h3(style="apdding-bottom: 10px;") Example Usage
+    pre /shurl/new/https://www.google.co.uk 
+    pre /shurl/new/http://freecodecamp.com/news
+    
+    p An invalid URL will return the following JSON object and the short URL will not be generated: 
+    pre {"error":"invalid", "message":"no valid URL provided"}
+      
+    h3(style="apdding-bottom: 10px;") Sample Response for valid input:
+    pre {"original_url": "http://freecodecamp.com/news", "short_url": "http://radiant-dawn-8754.herokuapp.com/short/4"}
+    
+    h3(style="apdding-bottom: 10px;") Usage:
+    pre http://radiant-dawn-8754.herokuapp.com/short/4
+    
+    h3(style="apdding-bottom: 10px;") WIll redirect to:
+    pre http://freecodecamp.com/news
