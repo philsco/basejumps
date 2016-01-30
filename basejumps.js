@@ -6,6 +6,8 @@ var path = require('path')
 var multer  = require('multer')
 var parser = require('ua-parser-js');
 var mongoose = require('mongoose');
+var request = require('request');
+
 var shorturl = require('./store/shurl'); 
 var imgsearch = require('./store/imgsearch');
 

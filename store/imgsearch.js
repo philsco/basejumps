@@ -1,7 +1,4 @@
 
-var request = require("request");
-var mongoose = require('mongoose');
-
 var urlString = 'mongodb://'+process.env.MONGOLAB_USER+':'+process.env.MONGOLAB_PASS+'@ds033145.mongolab.com:33145/fcc_challenges';
 if (!schSchema) {
     console.log('creating schema')
