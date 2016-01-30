@@ -11,20 +11,18 @@ if (!shurlSchema) {
             });
     }
 
-if (mongoose.connection.readyState !== 1) {
-    mongoose.connect(urlString, function (err, res) {
-        if (err) {
-            console.log('err on connect');
-            callback({"error":"Connection", "message":"Experiencing database connecivity issues, please try again"});
-        } else {
-            console.log('successfully connected')                
-            }
-        });
-    };
-    
     
 module.exports = function (action, payload, callback) {
-    if (action === "genShort") {
+    if (mongoose.connection.readyState !== 1) {
+        mongoose.connect(urlString, function (err, res) {
+            if (err) {
+                console.log('err on connect');
+                callback(JSON.stringify({"error":"Connection", "message":"Experiencing database connecivity issues, please try again"}));
+            } else {
+                console.log('successfully connected')                
+                }
+            });
+        } else if (action === "genShort") {
         var master = new RegExp(/^(http(s)?:\/\/)?(www\.)?[a-z0-9\-\.]{3,}\.[a-z]+(\/[a-z0-9-_~]+)?$/);          
         if (!master.test(payload)) {
             callback (JSON.stringify({"error":"invalid", "message":"no valid URL provided"}));   
