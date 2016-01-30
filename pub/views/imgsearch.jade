@@ -1,0 +1,26 @@
+doctype
+html(lang="en")
+  head
+    title FCC : Image Search Abstraction Layer
+    meta( charset='utf-8' )
+    meta( http-equiv='X-UA-Compatible', content='IE=edge' )
+    meta( name='viewport', content='width=device-width, initial-scale=1.0' )
+    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet")
+ 
+body
+  .container
+    h3(style="padding-top:20px; padding-bottom:20px;") FCC : Image Search Abstraction Layer
+    blockquote User Stories:
+      ol
+       li(style="padding-top: 10px;") I can get the image URLs, alt text and page urls for a set of images relating to a given search string.
+       li(style="padding-top: 10px;") I can paginate through the responses by adding a ?offset=2 parameter to the URL.
+       li(style="padding-top: 10px;") I can get a list of the most recently submitted search strings.
+    h3(style="apdding-bottom: 10px;") Example Usage
+    h4(style="apdding-bottom: 10px;") Image Search
+    pre /imgsearch?q=yellow%20flower&offset=2 
+    
+    h4(style="apdding-bottom: 10px;") Query History (most recent 10 searches)
+    pre /imgsearch/latest
+    p Powered by
+      a(href="http://pixabay.com")
+        img(src="https://pixabay.com/static/img/logo.svg", style="width: 150px; margin: 20px") 

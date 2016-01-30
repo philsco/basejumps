@@ -7,6 +7,7 @@ var multer  = require('multer')
 var parser = require('ua-parser-js');
 var mongoose = require('mongoose');
 var shorturl = require('./store/shurl'); 
+var imgsearch = require('./store/imgsearch');
 
 var upload = multer({ dest: 'pub/uploads/' });
 
@@ -111,7 +112,33 @@ app.post('/upload', upload.single('fileup'), function (req, res, next) {
 
 app.get('/metadata', function (req, res) {
   res.render('metadata');
-})
+});
+
+app.get('/imgsearch/latest', function (req, res) {
+    imgsearch("getLatest", null, function (result) {
+        res.end(result);
+        return;        
+    });
+});
+
+app.get('/imgsearch*', function (req, res) {
+    if (!req.query.q || req.query.q.split(" ").length === 0) {
+        res.end(JSON.stringify({"error": "badquery", "message": "This is not a valid query"}));
+    } else {
+        var queryObj = {};
+        queryObj.q = req.query.q.split(" ");
+        queryObj.p = req.query.offset || 1;
+        imgsearch("saveQuery", queryObj, function (result) {
+            res.end(result);
+            return;        
+        });
+    }
+});
+
+
+app.get('/imgsearch', function (req, res) {
+  res.render('imgsearch');
+});
 
 app.all('/*', function (req, res) {
   res.render('index');
