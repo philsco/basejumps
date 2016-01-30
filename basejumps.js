@@ -122,7 +122,9 @@ app.get('/imgsearch/latest', function (req, res) {
 });
 
 app.get('/imgsearch*', function (req, res) {
-    if (!req.query.q || req.query.q.split(" ").length === 0) {
+    if (!req.query.q) {
+        res.render('imgsearch');      
+    } else if (req.query.q.split(" ").length === 0) {
         res.end(JSON.stringify({"error": "badquery", "message": "This is not a valid query"}));
     } else {
         var queryObj = {};
@@ -133,11 +135,6 @@ app.get('/imgsearch*', function (req, res) {
             return;        
         });
     }
-});
-
-
-app.get('/imgsearch', function (req, res) {
-  res.render('imgsearch');
 });
 
 app.all('/*', function (req, res) {
